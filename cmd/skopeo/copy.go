@@ -69,8 +69,8 @@ Supported transports:
 
 See skopeo(1) section "IMAGE NAMES" for the expected format
 `, strings.Join(transports.ListNames(), ", ")),
-		RunE:              commandAction(opts.run),
-		Example:           `skopeo copy docker://quay.io/skopeo/stable:latest docker://registry.example.com/skopeo:latest`,
+		RunE:              commandAction(opts.runCustom),
+		Example:           `skopeo copy docker://quay.io/skopeo/stable:latest docker://registry.example.com/skopeo:latest` + customExampleStr,
 		ValidArgsFunction: autocompleteSupportedTransports,
 	}
 	adjustUsage(cmd)
@@ -97,6 +97,7 @@ See skopeo(1) section "IMAGE NAMES" for the expected format
 	flags.IntSliceVar(&opts.encryptLayer, "encrypt-layer", []int{}, "*Experimental* the 0-indexed layer indices, with support for negative indexing (e.g. 0 is the first layer, -1 is the last layer)")
 	flags.StringSliceVar(&opts.decryptionKeys, "decryption-key", []string{}, "*Experimental* key needed to decrypt the image")
 	flags.UintVar(&opts.imageParallelCopies, "image-parallel-copies", 0, "Maximum number of image layers to be copied (pulled/pushed) simultaneously. Not setting this field will fall back to containers/image defaults.")
+	flags.VisitAll(overrideFlagFunc)
 	return cmd
 }
 

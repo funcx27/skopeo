@@ -1,0 +1,6 @@
+# Ignore maze runner generated files
+maze_output
+vendor
+
+# ignore the gemfile to prevent testing against stale versions
+Gemfile.lock

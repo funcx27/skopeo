@@ -9,8 +9,8 @@ import (
 	commonFlag "github.com/containers/common/pkg/flag"
 	"github.com/containers/image/v5/signature"
 	"github.com/containers/image/v5/types"
-	"github.com/containers/skopeo/version"
 	"github.com/containers/storage/pkg/reexec"
+	"github.com/funcx27/skopeo/version"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
@@ -80,7 +80,7 @@ func createApp() (*cobra.Command, *globalOptions) {
 	rootCommand.Flags().BoolVarP(&dummyVersion, "version", "v", false, "Version for Skopeo")
 	rootCommand.PersistentFlags().BoolVar(&opts.debug, "debug", false, "enable debug output")
 	rootCommand.PersistentFlags().StringVar(&opts.policyPath, "policy", "", "Path to a trust policy file")
-	rootCommand.PersistentFlags().BoolVar(&opts.insecurePolicy, "insecure-policy", false, "run the tool without any policy check")
+	rootCommand.PersistentFlags().BoolVar(&opts.insecurePolicy, "insecure-policy", true, "run the tool without any policy check")
 	rootCommand.PersistentFlags().StringVar(&opts.registriesDirPath, "registries.d", "", "use registry configuration files in `DIR` (e.g. for container signature storage)")
 	rootCommand.PersistentFlags().StringVar(&opts.overrideArch, "override-arch", "", "use `ARCH` instead of the architecture of the machine for choosing images")
 	rootCommand.PersistentFlags().StringVar(&opts.overrideOS, "override-os", "", "use `OS` instead of the running OS for choosing images")
